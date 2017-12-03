@@ -1,0 +1,11 @@
+#!/root/znci_venv/bin/python
+import sys
+import tasks
+
+def post_receive(to_commit, branch):
+    tasks.run_tests.delay(to_commit)
+
+
+if __name__ == '__main__':
+    from_commit, to_commit, branch = sys.stdin.read().split()
+    post_receive(to_commit, branch)
